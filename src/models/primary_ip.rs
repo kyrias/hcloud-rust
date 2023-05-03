@@ -16,7 +16,7 @@ pub struct PrimaryIp {
     pub assignee_id: Option<i32>,
     /// Resource type the Primary IP can be assigned to
     #[serde(rename = "assignee_type")]
-    pub assignee_type: AssigneeType,
+    pub assignee_type: String,
     /// Delete this Primary IP when the resource it is assigned to is deleted
     #[serde(rename = "auto_delete")]
     pub auto_delete: bool,
@@ -53,7 +53,7 @@ impl PrimaryIp {
     #![allow(clippy::too_many_arguments)]
     pub fn new(
         assignee_id: Option<i32>,
-        assignee_type: AssigneeType,
+        assignee_type: String,
         auto_delete: bool,
         blocked: bool,
         created: String,
@@ -81,18 +81,5 @@ impl PrimaryIp {
             protection: Box::new(protection),
             r#type,
         }
-    }
-}
-
-/// Resource type the Primary IP can be assigned to
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum AssigneeType {
-    #[serde(rename = "server")]
-    Server,
-}
-
-impl Default for AssigneeType {
-    fn default() -> AssigneeType {
-        Self::Server
     }
 }
